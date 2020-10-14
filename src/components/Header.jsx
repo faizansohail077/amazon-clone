@@ -4,11 +4,11 @@ import './Header.css'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 // import { useStateValue } from '../StateProvider';
-// import {initialState} from '../reducer'
+import {initialState} from '../reducer'
 
 function Header() {
 
-    // const [{basket},dispatch] = useReducer(initialState);
+    const [{basket},dispatch] = useReducer(initialState);
     return (
         <nav className="header">
             <Link to="/login">
