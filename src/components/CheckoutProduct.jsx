@@ -1,13 +1,15 @@
 import React, { useReducer } from 'react'
-import { initialState } from '../reducer';
+// import { initialState } from '../reducer';
 import './CheckoutProduct.css'
-import ReducerComp from '../reducer'
+// import ReducerComp from '../reducer'
+import { useStateValue } from '../StateProvider';
 
 
 
 function CheckoutProduct({ id, title, image, price, rating }) {
-    const [state, dispatch] = useReducer(ReducerComp, initialState);
-
+    // const [state, dispatch] = useReducer(ReducerComp, initialState);
+    const {state,dispatch} = useStateValue();
+   
     const removeFromBasket = () => {
 
         dispatch({
@@ -29,8 +31,8 @@ function CheckoutProduct({ id, title, image, price, rating }) {
                 <div className="checkoutProduct__rating">
                     {Array(rating)
                         .fill()
-                        .map((_) => (
-                            <p>🌟 </p>
+                        .map((_,index) => (
+                            <p key={index}>🌟 </p>
                         ))}
                 </div>
 

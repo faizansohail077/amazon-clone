@@ -1,16 +1,15 @@
 import React, { useReducer } from 'react'
-// import { useStateValue } from '../StateProvider'
+import { useStateValue } from '../StateProvider'
 import './Product.css'
 
-import ReducerComp, { initialState } from '../reducer'
+// import ReducerComp, { initialState } from '../reducer'
 
 
 
 
 function Product({ id, title, price, rating, image }) {
-
-    const [{basket}, dispatch] = useReducer(ReducerComp, initialState);
-
+const {dispatch,state} = useStateValue();
+const {basket,user} = state;
     const addToBasket = () => {
         // dispatch the item into the data layer
         dispatch({
@@ -23,6 +22,7 @@ function Product({ id, title, price, rating, image }) {
                 rating: rating,
             },
         });
+        console.log(basket)
     }
 
     return (

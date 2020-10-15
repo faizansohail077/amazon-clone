@@ -4,9 +4,11 @@ import { initialState } from '../reducer';
 import ReducerComp from '../reducer'
 import CheckoutProduct from './CheckoutProduct'
 import Subtotal from './Subtotal';
+import { useStateValue } from '../StateProvider';
 
 function Checkout() {
-    const [{ basket }] = useReducer(ReducerComp, initialState);
+    const {state} = useStateValue();
+    const {basket,user} = state;
     return (
 
         <div className="checkout">

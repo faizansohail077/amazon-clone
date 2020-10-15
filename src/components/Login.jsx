@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import { auth } from 'firebase';
+import  auth  from '../firebase';
 import { Link, useHistory } from 'react-router-dom'
 import './Login.css'
 
@@ -16,8 +16,9 @@ function Login() {
 
 
     const login = (e) => {
-        e.preventDefault();
-        auth.signInWithEmailAndPassword(email, password)
+        e.preventDefault()
+        auth
+            .signInWithEmailAndPassword(email, password)
             .then((auth) => {
                 history.push('/')
             })

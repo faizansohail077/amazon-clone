@@ -1,18 +1,18 @@
 import React, { useEffect, useReducer } from 'react';
-import { auth } from 'firebase';
+import auth from './firebase';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Checkout from './components/Checkout';
 import Header from './components/Header';
 import Home from './components/Home';
 import Login from './components/Login';
-import ReducerComp, { initialState } from './reducer';
-
+// import ReducerComp, { initialState } from './reducer';
+import { useStateValue } from './StateProvider';
 
 function App() {
-
-  const [{ basket }, dispatch] = useReducer(ReducerComp, initialState);
-
+const {dispatch,state} = useStateValue()
+  // const [{ user }, dispatch] = useReducer(ReducerComp, initialState);
+const {user} = state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -30,11 +30,11 @@ function App() {
 
     })
 
-    return ()=>{
+    return () => {
       unsubscribe();
     }
   }, [])
-
+  console.log('user is this', user)
 
   return (
 

@@ -3,15 +3,24 @@ import { Link } from 'react-router-dom'
 import './Header.css'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-// import { useStateValue } from '../StateProvider';
-import {initialState} from '../reducer'
+import { useStateValue } from '../StateProvider';
+import { initialState } from '../reducer'
 import ReducerComp from '../reducer'
+import auth from '../firebase';
 
 
 function Header() {
+    const {state} = useStateValue();
+   const {basket,user} = state;
+    // const [{ basket, user }, dispatch] = useReducer(ReducerComp, initialState);
+    // console.log({ basket })
+   
 
-    const [{basket},dispatch] = useReducer(ReducerComp,initialState);
-    console.log({basket})
+    const login = () => {
+        if (user) {
+            auth.signOut();
+        }
+    }
     return (
         <nav className="header">
             <Link to="/">
@@ -24,16 +33,16 @@ function Header() {
 
             <div className="header__nav">
 
-                <Link to="/login" className="header__link">
-                    <div className="header__option">
-                        <span className="header__optionLineOne">hello faizan</span>
-                        <span className="header__optionLineTwo" >Sign in</span>
+                <Link to={!user && "/login"} className="header__link">
+                    <div onClick={login} className="header__option">
+                        <span className="header__optionLineOne">hello {user?.email}</span>
+                        <span className="header__optionLineTwo" >{user ? 'Sign out' : 'sign In'} </span>
                     </div>
                 </Link>
 
 
 
-                <Link to="/login" className="header__link">
+                <Link className="header__link">
                     <div className="header__option">
                         <span className="header__optionLineOne">return</span>
                         <span className="header__optionLineTwo">Order</span>
