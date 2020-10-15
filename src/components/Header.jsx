@@ -5,13 +5,16 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 // import { useStateValue } from '../StateProvider';
 import {initialState} from '../reducer'
+import ReducerComp from '../reducer'
+
 
 function Header() {
 
-    const [{basket},dispatch] = useReducer(initialState);
+    const [{basket},dispatch] = useReducer(ReducerComp,initialState);
+    console.log({basket})
     return (
         <nav className="header">
-            <Link to="/login">
+            <Link to="/">
                 <img className="header__logo" src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" />
             </Link>
             <div className="header__search">
@@ -49,7 +52,7 @@ function Header() {
                 <Link to="/checkout" className="header__link">
                     <div className="header__optionBasket">
                         <ShoppingBasketIcon />
-                        <span className="header__optionLineTwo header__basketCount">3</span>
+                        <span className="header__optionLineTwo header__basketCount">{basket?.length}</span>
                     </div>
                 </Link>
 
